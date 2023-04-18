@@ -1,5 +1,10 @@
 
-saldytuvas = {}
+saldytuvas = {'spageciai': [1, "kg"], 'pomidoru padazas': [1, "kg"], 'suris': [1, "kg"]}
+receptai = {
+    "Spageciai su suriu": {'spageciai': 1, 'pomidoru padazas': 1, 'suris': 1}, \
+    "sumustinis 1": {"batonas": 1, "sviestas": 1, "suris": 1}, \
+    'blynai': {'kiausinis': 2,'pienas' : 0.5 , 'miltai': 1}
+}
 
 def remove_product():
     name = input('iveskite produkta: ')
@@ -50,13 +55,28 @@ def total_mass():
             total_vienetas += value[0]
 
     print("Bendra produktų masė: {:.2f} kg ir {:.2f} l, {} vienetai".format(total_kg/1, total_l, total_vienetas))
- 
+
+def ar_iseina():
+    for key in receptai.keys():
+        print(key)
+
+    x = input("ka norite gaminti?: ")
+    if x in receptai.keys():
+        for key, val in receptai[x].items():
+            if key in saldytuvas and val > saldytuvas[key][0]:
+                print(f'sito produkto {key} uztenka')
+            else:
+                print(f'sito produkto {key} neuztenka')
+
+
+
 
 while True:
     print("""
     1- prideti produkta
     2- isimti produkta
     3- apziureti produktus saldytuve
+    4- ar iseina
 
     0- iseiti
     
@@ -76,6 +96,9 @@ while True:
     elif choice == 3:
         view_product()
         total_mass()
+
+    elif choice == 4:
+        ar_iseina()
 
     elif choice == 0:
         print("Viso gero")
