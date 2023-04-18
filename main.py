@@ -5,10 +5,11 @@ def remove_product():
     pass
 
 def add_product(product_name, product_type, quantity=1):
-    product_name = input("Įveskite produkto pavadinimą: ")
+    
     quantity = float(input("Įveskite kiekį: "))
-    saldytuvas[product_name] = quantity
+    saldytuvas[product_name] = [quantity, product_type]
     print("Produktas sėkmingai pridėtas į šaldytuvą!\n")
+    print(saldytuvas)
 
 def view_product():
     pass
@@ -28,7 +29,6 @@ while True:
     if choice == 1:
         name = input("produkto pavadinimas: ")
         tipas = input("ar produktas yra skaiciuojamas litrais ?: ")
-        kiekis = int(input("kiekis idedamas i saldytuva: "))
         
         
         if tipas.lower() == "taip":
