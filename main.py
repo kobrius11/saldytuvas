@@ -1,21 +1,27 @@
-saldytuvas = {}
+saldytuvas = {"morkos" : 3, "burokai" : 2, "bananai" : 5, "bulves:" : 7, "pienas" : 1, "apelsinai" : 2}
 
 
-def remove_product(name):
+
+def remove_product():
+    name = input('iveskite produkta: ')
     if name in saldytuvas.keys():
-     istrinti = saldytuvas.pop(name)
-     liko = istrinti - 1
-     return liko
+        if saldytuvas[name] > 1:
+            istrinti = saldytuvas.get(name)
+            saldytuvas[name] = istrinti - 1
+        else:
+            saldytuvas.pop(name)
+        return 
 
-def add_product(product_name, product_type, quantity=1):
+def add_product(product_name, quantity=1):
     
     quantity = float(input("Įveskite kiekį: "))
-    saldytuvas[product_name] = [quantity, product_type]
+    saldytuvas[product_name] = quantity
     print("Produktas sėkmingai pridėtas į šaldytuvą!\n")
     print(saldytuvas)
 
 def view_product():
-    pass
+    for key, value in saldytuvas.items():
+        print( key, value)
 
 
 while True:
@@ -31,23 +37,23 @@ while True:
 
     if choice == 1:
         name = input("produkto pavadinimas: ")
-        tipas = input("ar produktas yra skaiciuojamas litrais ?: ")
         
         
-        if tipas.lower() == "taip":
-            tipas = True
-        else:
-            tipas = False
+        
+        
 
-        add_product(name, tipas)
+        add_product(name)
 
         
 
     elif choice == 2:
-        pass
+        
+        print(saldytuvas)
+        remove_product()
+        print(saldytuvas)
 
     elif choice == 3:
-        pass
+        view_product()
 
     elif choice == 0:
         print("Viso gero")
