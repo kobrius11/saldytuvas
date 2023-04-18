@@ -63,7 +63,7 @@ def ar_iseina():
     x = input("ka norite gaminti?: ")
     if x in receptai.keys():
         for key, val in receptai[x].items():
-            if key in saldytuvas and val > saldytuvas[key][0]:
+            if key in saldytuvas and val <= saldytuvas[key][0]:
                 print(f'sito produkto {key} uztenka')
             else:
                 print(f'sito produkto {key} neuztenka')
