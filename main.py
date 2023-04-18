@@ -1,8 +1,11 @@
 saldytuvas = {}
 
 
-def remove_product():
-    pass
+def remove_product(name):
+    if name in saldytuvas.keys():
+     istrinti = saldytuvas.pop(name)
+     liko = istrinti - 1
+     return liko
 
 def add_product(product_name, product_type, quantity=1):
     
