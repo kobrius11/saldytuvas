@@ -26,5 +26,6 @@ BONUS:
 Tada programa turėtų:
 - išvesti, ar užtenka ingredientų patiekalams paruošti
 - jeigu neužtenka, išvardinti ko ir kiek trūksta (shopping list).
+
 - išvesti, kelioms porcijoms užtenka ingredientų, jei yra perteklius
 '''
