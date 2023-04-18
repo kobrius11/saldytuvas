@@ -6,12 +6,12 @@ receptai = {
     'blynai': {'kiausinis': 2,'pienas' : 0.5 , 'miltai': 1}
 }
 
-def remove_product():
-    name = input('iveskite produkta: ')
+def remove_product(name, quantity=1):
+    
 
     if name in saldytuvas.keys():
-        if saldytuvas[name][0] > 1:
-            saldytuvas[name][0] -= 1
+        if saldytuvas[name][0] > quantity:
+            saldytuvas[name][0] -= quantity
 
         else:
             saldytuvas.pop(name)
@@ -68,12 +68,17 @@ def ar_iseina():
                 kartai = saldytuvas[key][0] / val
                 print(f'sito produkto {key} uztenka, pagaminti {x} recepta, {kartai} kartu')
             else:
-                print(f'sito produkto {key} neuztenka, pagaminti {x} recepta, {kartai} kartu')
+                kartai = 0
+                print(f'sito produkto {key} neuztenka, pagaminti {x} recepta')
         choice = input(f"ar norite gaminti, patiekala? {x}: ")
         if choice.lower() == "taip" and kartai > 0:
             for key, val in receptai[x].items():
-                saldytuvas[key][0] -= val
-        add_product(x, unit="porcija", quantity=1)
+                remove_product(key, val)
+                #saldytuvas[key][0] -= val
+            add_product(x, unit="porcija", quantity=1)
+        else:
+            print('\nnegalima pagaminti produkto :(')
+
             
         
 
@@ -100,9 +105,9 @@ while True:
         add_product(name, unit, quantity)
 
     elif choice == 2:
-        
+        name = input("iveskite produkto pavadinima: ")
         print(saldytuvas)
-        remove_product()
+        remove_product(name)
         print(saldytuvas)
 
     elif choice == 3:
