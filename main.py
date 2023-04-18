@@ -1,4 +1,4 @@
-
+# Užduotis - funkijų išnaudojimas basic projekte
 saldytuvas = {'spageciai': [1, "kg"], 'pomidoru padazas': [1, "kg"], 'suris': [1, "kg"]}
 receptai = {
     "Spageciai su suriu": {'spageciai': 1, 'pomidoru padazas': 1, 'suris': 1}, \
@@ -16,7 +16,6 @@ def remove_product():
         else:
             saldytuvas.pop(name)
         return
-
 
 def add_product(product_name):
     quantity = float(input("Įveskite kiekį: "))
@@ -68,9 +67,6 @@ def ar_iseina():
             else:
                 print(f'sito produkto {key} neuztenka')
 
-
-
-
 while True:
     print("""
     1- prideti produkta
@@ -107,3 +103,14 @@ while True:
     else:
         print('')
         
+# galiu paaiškinti, ką reiškia kai kurių kodinio pavyzdžio eilučių kodas:
+
+# Eilutėje 1 yra sukurtas žodynas (dictionary) "saldytuvas", kuriame saugoma informacija apie produktų kiekius ir vienetus.
+# Eilutėje 2 yra sukurtas žodynas "receptai", kuriame saugoma informacija apie receptus ir reikalingus produktų kiekius.
+# Eilutėje 5 pradedama "remove_product()" funkcija, skirta ištrinti produktą iš saldytuvo.
+# Eilutėje 15 pradedama "add_product()" funkcija, skirta pridėti produktą į saldytuvą.
+# Eilutėje 23 pradedama "view_product()" funkcija, skirta peržiūrėti produktus, esančius saldytuve.
+# Eilutėje 34 pradedama "total_mass()" funkcija, skirta apskaičiuoti bendrą produktų masę, esančią saldytuve.
+# Eilutėje 43 pradedama "ar_iseina()" funkcija, skirta patikrinti, ar galima pagaminti pasirinktą receptą iš produktų, esančių saldytuve.
+# Eilutėje 50-61 yra meniu, kuriame vartotojas gali pasirinkti, kokią funkciją vykdyti.
+# Eilutėje 63 programa baigiasi.
