@@ -1,19 +1,15 @@
-
 saldytuvas = {"morkos": 3, "burokai": 2, "bananai": 5, "bulves": 7, "pienas": 1, "apelsinai": 2}
 
 
 def remove_product():
     name = input('Įveskite produkto pavadinimą: ')
     if name in saldytuvas.keys():
-        ###
-        if saldytuvas[name].get("quantity") > 1:
-            ###
-            istrinti = saldytuvas.get(name).get("quantity")
+        if saldytuvas[name] > 1:
+            istrinti = saldytuvas.get(name)
             saldytuvas[name] = istrinti - 1
         else:
             saldytuvas.pop(name)
         return
-
 
 def add_product(product_name, unit):
     quantity = float(input("Įveskite kiekį: "))
@@ -22,7 +18,7 @@ def add_product(product_name, unit):
     if product_name in saldytuvas:
         saldytuvas[product_name] += quantity
     else:
-        saldytuvas[product_name] = {"quantity": quantity, "Type": product_type}
+        saldytuvas[product_name] = quantity
     print("Produktas sėkmingai pridėtas į šaldytuvą!\n")
     print(saldytuvas)
 
@@ -40,7 +36,7 @@ def total_mass():
             total_l += value
         elif key in ["bananai", "apelsinai"]:
             total_kg += value * 0.5  # assuming an average weight of 0.5 kg per fruit
-    print("Bendra produktų masė: {:.2f} kg ir {:.2f} l".format(total_kg/1000, total_l))
+    print("Bendra produktų masė: {:.2f} kg ir {:.2f} l".format(total_kg/1, total_l))
 
 while True:
     print("""
