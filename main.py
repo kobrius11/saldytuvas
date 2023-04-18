@@ -1,1 +1,2 @@
-
+# pradžia
+fridge = {}
