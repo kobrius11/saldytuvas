@@ -66,16 +66,21 @@ def ar_iseina():
 
             if key in saldytuvas and val <= saldytuvas[key][0]:
                 kartai = saldytuvas[key][0] / val
-                print(f'sito produkto {key} uztenka, pagaminti {x} recepta, {kartai} kartu')
+                print(f'sito produkto {key} uztenka, pagaminti {x} recepta, {kartai} kartu\n')
+                
             else:
                 kartai = 0
-                print(f'sito produkto {key} neuztenka, pagaminti {x} recepta')
+                print(f'sito produkto {key} neuztenka, pagaminti {x} recepta\n')
+        
         choice = input(f"ar norite gaminti, patiekala? {x}: ")
+
         if choice.lower() == "taip" and kartai > 0:
+
             for key, val in receptai[x].items():
                 remove_product(key, val)
                 #saldytuvas[key][0] -= val
             add_product(x, unit="porcija", quantity=1)
+
         else:
             print('\nnegalima pagaminti produkto :(')
 
