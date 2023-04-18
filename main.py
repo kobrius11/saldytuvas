@@ -31,7 +31,7 @@ def add_product(product_name):
 def view_product():
 
     for key, value in saldytuvas.items():
-        print( key, value)
+        print(key, value)
 
 def total_mass():
     total_kg = 0
