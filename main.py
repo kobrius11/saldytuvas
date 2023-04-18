@@ -1,15 +1,19 @@
+
 saldytuvas = {"morkos": 3, "burokai": 2, "bananai": 5, "bulves": 7, "pienas": 1, "apelsinai": 2}
 
 
 def remove_product():
     name = input('Įveskite produkto pavadinimą: ')
     if name in saldytuvas.keys():
-        if saldytuvas[name] > 1:
-            istrinti = saldytuvas.get(name)
+        ###
+        if saldytuvas[name].get("quantity") > 1:
+            ###
+            istrinti = saldytuvas.get(name).get("quantity")
             saldytuvas[name] = istrinti - 1
         else:
             saldytuvas.pop(name)
         return
+
 
 def add_product(product_name, unit):
     quantity = float(input("Įveskite kiekį: "))
@@ -18,7 +22,7 @@ def add_product(product_name, unit):
     if product_name in saldytuvas:
         saldytuvas[product_name] += quantity
     else:
-        saldytuvas[product_name] = quantity
+        saldytuvas[product_name] = {"quantity": quantity, "Type": product_type}
     print("Produktas sėkmingai pridėtas į šaldytuvą!\n")
     print(saldytuvas)
 
