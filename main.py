@@ -15,7 +15,10 @@ def remove_product():
 def add_product(product_name, quantity=1):
     
     quantity = float(input("Įveskite kiekį: "))
-    saldytuvas[product_name] = quantity
+    if product_name in saldytuvas: 
+        saldytuvas[product_name] += quantity
+    else:
+        saldytuvas[product_name] = quantity
     print("Produktas sėkmingai pridėtas į šaldytuvą!\n")
     print(saldytuvas)
 
