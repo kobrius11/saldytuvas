@@ -34,15 +34,16 @@ def view_product():
 def total_mass():
     total_kg = 0
     total_l = 0
-    for key, value in saldytuvas.items():
-        if key in ["morkos", "burokai", "bulves"]:
-            total_kg += value
-        elif key in ["pienas"]:
-            total_l += value
-        elif key in ["bananai", "apelsinai"]:
-            total_kg += value * 0.5  # assuming an average weight of 0.5 kg per fruit
-    print("Bendra produktų masė: {:.2f} kg ir {:.2f} l".format(total_kg/1, total_l))
-
+    total_vienetas = 0
+    for value in saldytuvas.values():
+        if value[1] == 'kg':
+            total_kg += value[0]
+        elif value[1] == 'l':
+            total_l += value[0]
+        else:
+            total_vienetas += value[0]
+    print("Bendra produktų masė: {:.2f} kg ir {:.2f} l, {} vienetai".format(total_kg/1, total_l, total_vienetas))
+ 
 
 while True:
     print("""
@@ -74,6 +75,7 @@ while True:
 
     elif choice == 3:
         view_product()
+        total_mass()
 
     elif choice == 0:
         print("Viso gero")
