@@ -17,9 +17,9 @@ def remove_product():
             saldytuvas.pop(name)
         return
 
-def add_product(product_name):
-    quantity = float(input("Įveskite kiekį: "))
-    unit = input("unit: ")
+def add_product(product_name, unit='kg', quantity=1):
+    # quantity = float(input("Įveskite kiekį: "))
+    # unit = input("unit: ")
     if unit == "kg":
         quantity *= 1  # convert kg to g
 
@@ -61,12 +61,26 @@ def ar_iseina():
 
     x = input("ka norite gaminti?: ")
     if x in receptai.keys():
-        for key, val in receptai[x].items():
-            if key in saldytuvas and val <= saldytuvas[key][0]:
-                print(f'sito produkto {key} uztenka')
-            else:
-                print(f'sito produkto {key} neuztenka')
 
+        for key, val in receptai[x].items():
+
+            if key in saldytuvas and val <= saldytuvas[key][0]:
+                kartai = saldytuvas[key][0] / val
+                print(f'sito produkto {key} uztenka, pagaminti {x} recepta, {kartai} kartu')
+            else:
+                print(f'sito produkto {key} neuztenka, pagaminti {x} recepta, {kartai} kartu')
+        choice = input(f"ar norite gaminti, patiekala? {x}: ")
+        if choice.lower() == "taip" and kartai > 0:
+            for key, val in receptai[x].items():
+                saldytuvas[key][0] -= val
+        add_product(x, unit="porcija", quantity=1)
+            
+        
+
+
+
+
+            
 while True:
     print("""
     1- prideti produkta
@@ -81,7 +95,9 @@ while True:
 
     if choice == 1:
         name = input("produkto pavadinimas: ")
-        add_product(name)
+        unit = input("unit: ")
+        quantity = float(input("Įveskite kiekį: "))
+        add_product(name, unit, quantity)
 
     elif choice == 2:
         
