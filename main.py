@@ -52,3 +52,6 @@ while True:
     else:
         print('invalid Choice')
         
+    saldytuvas = {"morkos" : 3, "burokai" : 2, "bananai" : 5, "bulves:" : 7, "pienas" : 1, "apelsinai" : 2}
+        for morkos, 3 in saldytuvas.items():
+        print(morkos, 3)
