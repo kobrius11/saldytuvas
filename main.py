@@ -2,7 +2,7 @@
 saldytuvas = {'spageciai': [1, "kg"], 'pomidoru padazas': [1, "kg"], 'suris': [1, "kg"]}
 receptai = {
     "Spageciai su suriu": {'spageciai': 1, 'pomidoru padazas': 1, 'suris': 1}, \
-    "sumustinis 1": {"batonas": 1, "sviestas": 1, "suris": 1}, \
+    "sumustinis": {"batonas": 1, "sviestas": 1, "suris": 1}, \
     'blynai': {'kiausinis': 2,'pienas' : 0.5 , 'miltai': 1}
 }
 
@@ -56,33 +56,34 @@ def total_mass():
     print("Bendra produktų masė: {:.2f} kg ir {:.2f} l, {} vienetai".format(total_kg/1, total_l, total_vienetas))
 
 def ar_iseina():
-    for key in receptai.keys():
-        print(key)
+    for count, key in enumerate(receptai.keys()):
+        print(f'Nr: {count} - {key}')
+    print('\n')
+    x = int(input("kuri nr norite gaminti?: "))
+    pasirinkimas = list(receptai)[x]
+    print("\n")
 
-    x = input("ka norite gaminti?: ")
-    if x in receptai.keys():
-
-        for key, val in receptai[x].items():
+    for key, val in receptai[pasirinkimas].items():
 
             if key in saldytuvas and val <= saldytuvas[key][0]:
                 kartai = saldytuvas[key][0] / val
-                print(f'sito produkto {key} uztenka, pagaminti {x} recepta, {kartai} kartu\n')
-                
+                print(f'sito produkto {key} uztenka, pagaminti {pasirinkimas} recepta, {kartai} kartu\n')
+
             else:
                 kartai = 0
-                print(f'sito produkto {key} neuztenka, pagaminti {x} recepta\n')
+                print(f'sito produkto {key} neuztenka, pagaminti {pasirinkimas} recepta\n')
         
-        choice = input(f"ar norite gaminti, patiekala? {x}: ")
+    choice = input(f"ar norite gaminti, patiekala? {pasirinkimas}: ")
 
-        if choice.lower() == "taip" and kartai > 0:
+    if choice.lower() == "taip" and kartai > 0:
 
-            for key, val in receptai[x].items():
+            for key, val in receptai[pasirinkimas].items():
                 remove_product(key, val)
                 #saldytuvas[key][0] -= val
             add_product(x, unit="porcija", quantity=1)
 
-        else:
-            print('\nnegalima pagaminti produkto :(')
+    else:
+        print('\nnegalima pagaminti produkto :(')
 
             
         
