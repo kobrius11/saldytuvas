@@ -5,7 +5,9 @@ saldytuvas = {"morkos" : 2, "burokai" : 2, "bananai" : 5, "bulves:" : 7, "pienas
 def remove_product():
     name = input('iveskite produkta: ')
     if name in saldytuvas.keys():
+        ###
         if saldytuvas[name].get("quantity") > 1:
+            ###
             istrinti = saldytuvas.get(name).get("quantity")
             saldytuvas[name] = istrinti - 1
         else:
@@ -13,6 +15,7 @@ def remove_product():
         return 
 
 def add_product(product_name, quantity=1):
+    ###
 
     product_type = bool(input("ar produktas skystas ?: "))
     quantity = float(input("Įveskite kiekį: "))
