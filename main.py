@@ -1,4 +1,4 @@
-saldytuvas = {}
+saldytuvas = {"morkos" : 3, "burokai" : 2, "bananai" : 5, "bulves:" : 7, "pienas" : 1, "apelsinai" : 2}
 
 
 
@@ -20,7 +20,8 @@ def add_product(product_name, quantity=1):
     print(saldytuvas)
 
 def view_product():
-    pass
+    for key, value in saldytuvas.items():
+        print( key, value)
 
 
 while True:
@@ -52,7 +53,7 @@ while True:
         print(saldytuvas)
 
     elif choice == 3:
-        pass
+        view_product()
 
     elif choice == 0:
         print("Viso gero")
@@ -60,6 +61,3 @@ while True:
     else:
         print('invalid Choice')
         
-    saldytuvas = {"morkos" : 3, "burokai" : 2, "bananai" : 5, "bulves:" : 7, "pienas" : 1, "apelsinai" : 2}
-        for morkos, 3 in saldytuvas.items():
-        print(morkos, 3)
