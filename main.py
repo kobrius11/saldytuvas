@@ -80,7 +80,7 @@ def ar_iseina():
             for key, val in receptai[pasirinkimas].items():
                 remove_product(key, val)
                 #saldytuvas[key][0] -= val
-            add_product(x, unit="porcija", quantity=1)
+            add_product(pasirinkimas, unit="porcija", quantity=1)
 
     else:
         print('\nnegalima pagaminti produkto :(')
