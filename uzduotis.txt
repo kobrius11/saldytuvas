@@ -19,12 +19,13 @@ tokiu atveju, mums nereikia apibrėžti mato vieneto
 -- skystų tankis = 1
 -- paruoštų patiekalų porcija sveria 1kg
 BONUS:
-Įterpti meniu punktą "ar išeina", kur vartotojo prašo įvesti:
+Įterpti meniu punktą "ar išeina", kur vartotojo prašo įvesti: +
 - vienos porcijos receptą
 -- įvedimo formatas: "ingredientas: kiekis" vienoje eilutėje.
-- porcijų kiekį
+- porcijų kiekį 
 Tada programa turėtų:
-- išvesti, ar užtenka ingredientų patiekalams paruošti
+- išvesti, ar užtenka ingredientų patiekalams paruošti +
 - jeigu neužtenka, išvardinti ko ir kiek trūksta (shopping list).
-- išvesti, kelioms porcijoms užtenka ingredientų, jei yra perteklius
+
+- išvesti, kelioms porcijoms užtenka ingredientų, jei yra perteklius+
 '''
