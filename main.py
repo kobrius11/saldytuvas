@@ -1,5 +1,5 @@
 # Užduotis - funkijų išnaudojimas basic projekte
-saldytuvas = {'spageciai': [1, "kg"], 'pomidoru padazas': [1, "kg"], 'suris': [1, "kg"]}
+saldytuvas = {'spageciai': [2, "kg"], 'pomidoru padazas': [2, "kg"], 'suris': [2, "kg"]}
 receptai = {
     "Spageciai su suriu": {'spageciai': 1, 'pomidoru padazas': 1, 'suris': 1}, \
     "sumustinis": {"batonas": 1, "sviestas": 1, "suris": 1}, \
