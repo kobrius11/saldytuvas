@@ -1,10 +1,6 @@
 # Užduotis - funkijų išnaudojimas basic projekte
 saldytuvas = {'spageciai': [2, "kg"], 'pomidoru padazas': [2, "kg"], 'suris': [2, "kg"]}
-receptai = {
-    "Spageciai su suriu": {'spageciai': 1, 'pomidoru padazas': 1, 'suris': 1}, \
-    "sumustinis": {"batonas": 1, "sviestas": 1, "suris": 1}, \
-    'blynai': {'kiausinis': 2,'pienas' : 0.5 , 'miltai': 1}
-}
+receptai = {}
 
 def remove_product(name, quantity=1):
     
@@ -55,41 +51,42 @@ def total_mass():
 
     print("Bendra produktų masė: {:.2f} kg ir {:.2f} l, {} vienetai".format(total_kg/1, total_l, total_vienetas))
 
-def ar_iseina():
-    for count, key in enumerate(receptai.keys()):
-        print(f'Nr: {count} - {key}')
-    print('\n')
-    x = int(input("kuri nr norite gaminti?: "))
-    pasirinkimas = list(receptai)[x]
-    print("\n")
-
-    for key, val in receptai[pasirinkimas].items():
-
-            if key in saldytuvas and val <= saldytuvas[key][0]:
-                kartai = saldytuvas[key][0] / val
-                print(f'sito produkto {key} uztenka, pagaminti {pasirinkimas} recepta, {kartai} kartu\n')
-
-            else:
-                kartai = 0
-                print(f'sito produkto {key} neuztenka, pagaminti {pasirinkimas} recepta\n')
-        
-    choice = input(f"ar norite gaminti, patiekala? {pasirinkimas}: ")
-
-    if choice.lower() == "taip" and kartai > 0:
-
-            for key, val in receptai[pasirinkimas].items():
-                remove_product(key, val)
-                #saldytuvas[key][0] -= val
-            add_product(pasirinkimas, unit="porcija", quantity=1)
-
+def ar_iseina(saldytuvas):
+    ivestas_receptas = str(input("Iveskite recepta formatu - Ingridientas : kiekis: "))
+    porcijos = int(input("Iveskite porciju kieki: "))
+    produktu_sarasas = ivestas_receptas.split(",")
+    receptas = {}
+    pirkiniu_sarasas = {}
+    for produktas in produktu_sarasas:
+        # receptas{produktas}
+        pavadinimas, kiekis = produktas.split(":")
+        pavadinimas = pavadinimas.strip()
+        receptas[pavadinimas] = float(kiekis)
+    if pavadinimas in saldytuvas:
+        for ingridiantas, kiekis in receptas.items():
+            if ingridiantas in saldytuvas:
+                if saldytuvas[ingridiantas][0] < kiekis * porcijos:
+                    pirkiniu_sarasas[ingridiantas] = (kiekis * porcijos)
+                else:
+                    print(f"{ingridiantas} = {kiekis * porcijos} Užtenka pagaminti {porcijos}")
+                    #saldytuvas[ingridiantas][0] -= kiekis * porcijos
+                    remove_product(ingridiantas, (kiekis * porcijos))  
+        print(f"Pirkinius sarašas: {pirkiniu_sarasas}")    
     else:
-        print('\nnegalima pagaminti produkto :(')
+        print(f"{pavadinimas} Nėra šaldytuve. Trūksta {float(kiekis)}")
+        
+
+
+                
+            
+
+    
+
+
+
+    
 
             
-        
-
-
-
 
             
 while True:
@@ -121,7 +118,7 @@ while True:
         total_mass()
 
     elif choice == 4:
-        ar_iseina()
+        ar_iseina(saldytuvas)
 
     elif choice == 0:
         print("Viso gero")
