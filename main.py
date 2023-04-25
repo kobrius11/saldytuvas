@@ -1,5 +1,10 @@
 # Užduotis - funkijų išnaudojimas basic projekte
-saldytuvas = {'spageciai': [2, "kg"], 'pomidoru padazas': [2, "kg"], 'suris': [2, "kg"]}
+import json
+
+with open("duomenys.json", "r", encoding="utf-8") as f:
+    saldytuvas = json.load(f) 
+
+# saldytuvas = {'spageciai': [2, "kg"], 'pomidoru padazas': [2, "kg"], 'suris': [2, "kg"]}
 receptai = {}
 
 def remove_product(name, quantity=1):
@@ -75,20 +80,7 @@ def ar_iseina(saldytuvas):
     else:
         print(f"{pavadinimas} Nėra šaldytuve. Trūksta {float(kiekis)}")
         
-
-
-                
-            
-
-    
-
-
-
-    
-
-            
-
-            
+      
 while True:
     print("""
     1- prideti produkta
@@ -126,7 +118,10 @@ while True:
 
     else:
         print('')
-        
+
+with open("duomenys.json", "w", encoding="utf-8") as f:
+    json.dump(saldytuvas, f)
+
 # galiu paaiškinti, ką reiškia kai kurių kodinio pavyzdžio eilučių kodas:
 
 # Eilutėje 1 yra sukurtas žodynas (dictionary) "saldytuvas", kuriame saugoma informacija apie produktų kiekius ir vienetus.
