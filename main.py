@@ -1,17 +1,45 @@
+import json
+import logging
+
+
+#logeris
+def create_logger(logger_name, log_file):
+    logger = logging.getLogger(logger_name)
+    logger.setLevel(logging.INFO)
+
+    file_handler = logging.FileHandler(log_file)
+    file_handler.setLevel(logging.INFO)
+
+    formatter = logging.Formatter('%(asctime)s - %(name)s - %(lineno)d - %(levelname)s - %(message)s')
+    file_handler.setFormatter(formatter)
+
+    logger.addHandler(file_handler)
+
+    return logger
+
+mano_logeris = create_logger("mano_logeris", 'logeris.log')
+
+
+
+
+
 # Užduotis - funkijų išnaudojimas basic projekte
-saldytuvas = {'spageciai': [2, "kg"], 'pomidoru padazas': [2, "kg"], 'suris': [2, "kg"]}
+with open('saldytuvas.json', 'r+', encoding='utf-8') as data:
+    saldytuvas = json.load(data)
+    mano_logeris.info("loaded saldytuvas.json")
+
 receptai = {}
 
 def remove_product(name, quantity=1):
-    
-
     if name in saldytuvas.keys():
         if saldytuvas[name][0] > quantity:
-            saldytuvas[name][0] -= quantity
-
+         saldytuvas[name][0] -= quantity
         else:
-            saldytuvas.pop(name)
-        return
+         saldytuvas.pop(name)
+        
+        with open("saldytuvas.json", "w", encoding="utf-8") as json_file:
+            json.dump(saldytuvas, json_file)
+            mano_logeris.info(f"removed from saldytuvas.json, {name}")
 
 def add_product(product_name, unit='kg', quantity=1):
     # quantity = float(input("Įveskite kiekį: "))
@@ -20,10 +48,14 @@ def add_product(product_name, unit='kg', quantity=1):
         quantity *= 1  # convert kg to g
 
     if product_name in saldytuvas: 
-        saldytuvas[product_name][0] += quantity
+     saldytuvas[product_name][0] += quantity
 
     else:
-        saldytuvas[product_name] = [quantity, unit]
+     saldytuvas[product_name] = [quantity, unit]
+
+    with open("saldytuvas.json", "w", encoding="utf-8") as json_file:
+            json.dump(saldytuvas, json_file)
+            mano_logeris.info(f"added to saldytuvas.json, {name}")
 
     print("Produktas sėkmingai pridėtas į šaldytuvą!\n")
     print(saldytuvas)
@@ -74,20 +106,6 @@ def ar_iseina(saldytuvas):
         print(f"Pirkinius sarašas: {pirkiniu_sarasas}")    
     else:
         print(f"{pavadinimas} Nėra šaldytuve. Trūksta {float(kiekis)}")
-        
-
-
-                
-            
-
-    
-
-
-
-    
-
-            
-
             
 while True:
     print("""
@@ -99,33 +117,56 @@ while True:
     0- iseiti
     
     """)
-    choice = int(input("pasirinkite funkcija: "))
-
-    if choice == 1:
-        name = input("produkto pavadinimas: ")
-        unit = input("unit: ")
-        quantity = float(input("Įveskite kiekį: "))
-        add_product(name, unit, quantity)
-
-    elif choice == 2:
-        name = input("iveskite produkto pavadinima: ")
-        print(saldytuvas)
-        remove_product(name)
-        print(saldytuvas)
-
-    elif choice == 3:
-        view_product()
-        total_mass()
-
-    elif choice == 4:
-        ar_iseina(saldytuvas)
-
-    elif choice == 0:
-        print("Viso gero")
-        break
-
+    try:
+        choice = int(input("pasirinkite funkcija: "))
+    except Exception as e:
+            mano_logeris.info(f"Klaida: {e.__class__.__name__}, {e.with_traceback(None)}")
+            print(f"Klaida: {e.__class__.__name__}, {e.with_traceback(None)}")
+            pass
     else:
-        print('')
+        if choice == 1:
+            try:
+                name = input("produkto pavadinimas: ")
+                unit = input("unit: ")
+                quantity = float(input("Įveskite kiekį: "))
+                add_product(name, unit, quantity)
+            except Exception as e:
+                mano_logeris.info(f"Klaida: {e.__class__.__name__}, {e.with_traceback(None)}")
+                print(f"Klaida: {e.__class__.__name__}, {e.with_traceback(None)}")
+                pass
+
+        elif choice == 2:
+            try:
+                name = input("iveskite produkto pavadinima: ")
+                remove_product(name)
+            except Exception as e:
+                mano_logeris.info(f"Klaida: {e.__class__.__name__}, {e.with_traceback(None)}")
+                print(f"Klaida: {e.__class__.__name__}, {e.with_traceback(None)}")
+                pass
+            else:
+                print(saldytuvas)
+            
+
+        elif choice == 3:
+            try:
+                view_product()
+                total_mass()
+            except Exception as e:
+                mano_logeris.info(f"Klaida: {e.__class__.__name__}, {e.with_traceback(None)}")
+                print(f"Klaida: {e.__class__.__name__}, {e.with_traceback(None)}")
+                pass
+
+
+        elif choice == 4:
+            ar_iseina(saldytuvas)
+
+        elif choice == 0:
+            print("Viso gero")
+            mano_logeris.info('Exit')
+            break
+
+        else:
+            print('')
         
 # galiu paaiškinti, ką reiškia kai kurių kodinio pavyzdžio eilučių kodas:
 
